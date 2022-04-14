@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	<mapper namespace="com.ezen.kimb.MemberInter">
+	
+	<insert id="memberinsert">
+		insert into fan_member values(#{param1},#{param2},#{param3},#{param4},#{param5},#{param6},#{param7})
+	</insert>
+	
+	<select id="memberout" resultType="com.ezen.kimb.MemberDTO">
+		select * from fan_member order by id desc
+	</select>
+	
+	<select id="login" resultType="com.ezen.kimb.MemberDTO">
+		select * from fan_member where id =#{param1} and pw = #{param2} 
+	</select>
+	
+	<select id="boardinsert">
+		insert into fan_board(num,id,title,content,readcnt,groups,step,indent)
+		values(num_seq.nextval,#{param1},#{param2},#{param3},0,num_seq.currval,0,0)
+	</select>
+	
+	<select id="boardout" resultType="com.ezen.kimb.BoardDTO">
+		select num,id,title,content,to_char(Writeday,'yyyy-mm-dd')writeday,readcnt,groups,step,indent from fan_board order by groups desc, step asc
+	</select>
+	
+	<select id="detail" resultType="com.ezen.kimb.BoardDTO">
+		select num,id,title,content,to_char(Writeday,'yyyy-mm-dd')writeday,readcnt,groups,step,indent from fan_board where num = #{param1}
+	</select>
+	
+	<update id="readcnt">
+		update fan_board set readcnt = readcnt + 1 where num = #{param1}
+	</update>
+	
+	<select id="replyview" resultType="com.ezen.kimb.BoardDTO">
+		select * from fan_board where num = #{param1} and id = #{param2}
+	</select>
+	
+	<insert id="reply">
+		insert into fan_board(num,groups,step,indent,id,title,content,readcnt) values(num_seq.nextval,#{param1}, #{param2}, #{param3}, #{param4}, #{param5}, #{param6},0)
+	</insert>
+	
+	<update id="stepup">
+		update fan_board set step = step +1 where groups = #{param1} and step > #{param2}
+	</update>
+	
+	<select id="boardin" resultType="com.ezen.kimb.MemberDTO">
+		select id,name from fan_member where id= #{param1}
+	</select>
+	</mapper>
