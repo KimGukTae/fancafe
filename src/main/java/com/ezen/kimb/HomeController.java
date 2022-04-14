@@ -188,6 +188,7 @@ public class HomeController {
 	}
 	
 	public void stepup(int groups, int step) {
+		System.out.println("hi");
 		MemberInter mdao = sqlSession.getMapper(MemberInter.class);
 		mdao.stepup(groups, step);
 	}
