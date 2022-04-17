@@ -22,6 +22,7 @@
 				<th>제목</th>
 				<th>작성일자</th>
 				<th>조회수</th>
+				<th>삭제 / 수정</th>
 			</tr>
 		</thead>
 		<c:forEach items="${list}" var="dto">
@@ -39,6 +40,12 @@
 					</td>
 					<td>${dto.writeday }</td>
 					<td>${dto.readcnt }</td>
+			
+					<td colspan="2">
+					<a href="delete?id=${dto.id}">삭제</a>
+					<a href="modifya?num=${dto.num} & id=${dto.id}">수정</a>
+					</td>
+					
 				</tr>
 			</tbody>
 		</c:forEach>

@@ -188,8 +188,27 @@ public class HomeController {
 	}
 	
 	public void stepup(int groups, int step) {
-		System.out.println("hi");
 		MemberInter mdao = sqlSession.getMapper(MemberInter.class);
 		mdao.stepup(groups, step);
 	}
+	
+	@RequestMapping(value = "/modifya")
+	public String modify(HttpServletRequest request,Model mo) {
+		String.valueOf(request.getParameter("num"));
+		String id = request.getParameter("id");
+		MemberInter mdao = sqlSession.getMapper(MemberInter.class);
+		ArrayList<BoardDTO> list = mdao.modifya(num,id);
+		mo.addAttribute("list", list);
+		return "modify";
+	}
+	
+	/*
+	@RequestMapping(value = "/modifysave")
+	public String modifysave(HttpServletRequest request) {
+		int num = Integer.parseInt(request.getParameter("num"));
+		String id = request.getParameter("id");
+		String content  = request.getParameter("content");
+		return "board_out";
+	}
+	*/
 }

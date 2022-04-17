@@ -48,4 +48,8 @@
 	<select id="boardin" resultType="com.ezen.kimb.MemberDTO">
 		select id,name from fan_member where id= #{param1}
 	</select>
+	
+	<select id="modifya" resultType="com.ezen.kimb.BoardDTO">
+		select num,id from fan_board where num=  #{param1} and id= #{param2}
+	</select>
 	</mapper>

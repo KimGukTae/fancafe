@@ -14,4 +14,5 @@ public interface MemberInter {
 	public void reply(int groups,int step,int indent,String id,String title,String content,int num);
 	public void stepup(int groups,int step);
 	public ArrayList<MemberDTO> boardin(String id);
+	public ArrayList<BoardDTO> modifya(int num,String id);
 }
