@@ -52,4 +52,14 @@
 	<select id="modifya" resultType="com.ezen.kimb.BoardDTO">
 		select num,id from fan_board where num=  #{param1} and id= #{param2}
 	</select>
+	
+	<update id="modifysave">
+		update fan_board set content = #{param2} where num= #{param1}
+	</update>
+	
+	<delete id="deletesave">
+		delete from fan_board where num= #{param1} 
+	</delete>
+
+	
 	</mapper>

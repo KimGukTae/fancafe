@@ -77,6 +77,7 @@ public class HomeController {
 			HttpSession hs = request.getSession();
 			hs.setAttribute("member", member);
 			hs.setAttribute("islogon", true);
+			
 			mav.setViewName("redirect:outsave");
 		}
 		else {
@@ -138,9 +139,22 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/boardout")
-	public String ko13(Model mo) {
+	public String ko13(HttpServletRequest request,Model mo) {
+		BoardDTO dto = new BoardDTO();
 		MemberInter mdao = sqlSession.getMapper(MemberInter.class);
 		ArrayList<BoardDTO> list = mdao.boardout();
+		String loginid= request.getParameter("id");
+
+		for(int i=0; i<list.size(); i++) {
+			
+			
+			if(list.get(i).id.equals(loginid)) {
+				list.get(i).setLog(1);
+			}
+			else {
+				list.get(i).setLog(0);
+			}
+		}
 		mo.addAttribute("list", list);
 		return "board_out";
 	}
@@ -194,7 +208,7 @@ public class HomeController {
 	
 	@RequestMapping(value = "/modifya")
 	public String modify(HttpServletRequest request,Model mo) {
-		String.valueOf(request.getParameter("num"));
+		int num = Integer.parseInt(request.getParameter("num"));
 		String id = request.getParameter("id");
 		MemberInter mdao = sqlSession.getMapper(MemberInter.class);
 		ArrayList<BoardDTO> list = mdao.modifya(num,id);
@@ -202,13 +216,25 @@ public class HomeController {
 		return "modify";
 	}
 	
-	/*
-	@RequestMapping(value = "/modifysave")
-	public String modifysave(HttpServletRequest request) {
+
+	@RequestMapping(method = RequestMethod.POST, value = "/modifysave")
+	public String modifysave(HttpServletRequest request,Model mo) {
 		int num = Integer.parseInt(request.getParameter("num"));
-		String id = request.getParameter("id");
 		String content  = request.getParameter("content");
-		return "board_out";
+		MemberInter mdao = sqlSession.getMapper(MemberInter.class);
+		mdao.modifysave(num,content);
+		return "redirect:boardout";
 	}
-	*/
+	
+	@RequestMapping(value = "/delete")
+	public String delete(HttpServletRequest request,Model mo) {
+		int num = Integer.parseInt(request.getParameter("num"));
+		MemberInter mdao = sqlSession.getMapper(MemberInter.class);
+		mdao.deletesave(num);
+		return "redirect:boardout";
+	}
+
+	
+	
+	
 }

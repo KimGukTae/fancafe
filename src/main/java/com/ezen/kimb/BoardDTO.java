@@ -4,9 +4,13 @@ public class BoardDTO {
 int num;
 String id,title,content,writeday;
 int readcnt,groups,step,indent;
-public BoardDTO() {}
-public BoardDTO(int num, String id, String title, String content, String writeday, int readcnt, int groups,
-		int step, int indent) {
+int log;
+public BoardDTO() {
+	super();
+	// TODO Auto-generated constructor stub
+}
+public BoardDTO(int num, String id, String title, String content, String writeday, int readcnt, int groups, int step,
+		int indent, int log) {
 	super();
 	this.num = num;
 	this.id = id;
@@ -17,6 +21,7 @@ public BoardDTO(int num, String id, String title, String content, String writeda
 	this.groups = groups;
 	this.step = step;
 	this.indent = indent;
+	this.log = log;
 }
 public int getNum() {
 	return num;
@@ -27,7 +32,7 @@ public void setNum(int num) {
 public String getId() {
 	return id;
 }
-public void getId(String id) {
+public void setId(String id) {
 	this.id = id;
 }
 public String getTitle() {
@@ -72,6 +77,13 @@ public int getIndent() {
 public void setIndent(int indent) {
 	this.indent = indent;
 }
+public int getLog() {
+	return log;
+}
+public void setLog(int log) {
+	this.log = log;
+}
+
 
 
 }

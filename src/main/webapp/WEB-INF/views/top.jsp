@@ -22,6 +22,7 @@
 		<tr>
 			<td style="width: 900px; text-align: right;">
 				<c:choose>
+				
 					<c:when test="${islogon==true && member != null}">
 						환영합니다${member.name}!! &emsp;
 						<a href="logout">로그아웃</a> 
@@ -51,15 +52,15 @@
       <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">게시판관리 <span class="caret"></span></a>
         <ul class="dropdown-menu">
       		  <c:choose>
-					<c:when test="${islogon==true && member != null}">
-					          <li><a href="boardin?id=${member.id}&name=${member.name}">글 등록</a></li>
-					          <li><a href="boardout">글 목록</a></li>
+				<c:when test="${islogon==true && member != null}">
+					<li><a href="boardin?id=${member.id}&name=${member.name}">글 등록</a></li>
+					<li><a href="boardout?id=${member.id}">글 목록</a></li>
 					</c:when>
 					<c:otherwise>
 						<li><a href="boardin">글 등록</a></li>
-						    <li><a href="boardout">글 목록</a></li>
+						<li><a href="boardout">글 목록</a></li>
 					</c:otherwise>
-				</c:choose>
+			</c:choose>
         </ul>
       </li>
       <!--  -->

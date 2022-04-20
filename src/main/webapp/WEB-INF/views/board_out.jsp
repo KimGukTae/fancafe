@@ -1,6 +1,9 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,6 +14,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+
 <body>
 <div class="container">
 	<h2 style="text-align: center;">김태리와 아이틀 회원목록</h2>
@@ -40,13 +44,18 @@
 					</td>
 					<td>${dto.writeday }</td>
 					<td>${dto.readcnt }</td>
-			
 					<td colspan="2">
-					<a href="delete?id=${dto.id}">삭제</a>
-					<a href="modifya?num=${dto.num} & id=${dto.id}">수정</a>
+					<c:choose>
+					<c:when test="${dto.log==1}">
+						<a href="delete?num=${dto.num}">삭제</a>
+						<a href="modifya?num=${dto.num}&id=${dto.id}">수정</a>
+					</c:when>
+					<c:otherwise>
+						<a>안보임</a>
+					</c:otherwise>
+					</c:choose>	
 					</td>
-					
-				</tr>
+				</tr>	
 			</tbody>
 		</c:forEach>
 	</table>
