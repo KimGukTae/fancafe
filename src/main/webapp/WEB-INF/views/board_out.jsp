@@ -55,7 +55,6 @@
 					</c:otherwise>
 					</c:choose>	
 					</td>
-				</tr>	
 			</tbody>
 		</c:forEach>
 	</table>

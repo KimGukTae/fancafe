@@ -17,6 +17,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -127,14 +129,14 @@ public class HomeController {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST,value = "/board_inputsave")
-	public String ko12(HttpServletRequest request,Model mo) {
+	public String ko12(HttpServletRequest request,Model mo,MultipartHttpServletRequest mul) {
 		String id = request.getParameter("id");
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
-		
+		MultipartFile fi = mul.getFile("picture");
+		String picture = fi.getOriginalFilename();
 		MemberInter mdao = sqlSession.getMapper(MemberInter.class);
-		mdao.boardinsert(id,title,content);
-		
+		mdao.boardinsert(id,title,content,picture);
 		return "redirect:index";
 	}
 	
@@ -144,7 +146,6 @@ public class HomeController {
 		MemberInter mdao = sqlSession.getMapper(MemberInter.class);
 		ArrayList<BoardDTO> list = mdao.boardout();
 		String loginid= request.getParameter("id");
-
 		for(int i=0; i<list.size(); i++) {
 			
 			
@@ -164,6 +165,7 @@ public class HomeController {
 		int num = Integer.parseInt(request.getParameter("num"));
 		MemberInter mdao = sqlSession.getMapper(MemberInter.class);
 		readcnt(num);
+		ModelAndView mav = new ModelAndView();
 		ArrayList<BoardDTO> list = mdao.detail(num);
 		mo.addAttribute("list", list);
 		return "board_detail";

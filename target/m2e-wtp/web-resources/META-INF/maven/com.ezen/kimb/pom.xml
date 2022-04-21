@@ -147,7 +147,20 @@
 		    <artifactId>spring-jdbc</artifactId>
 		    <version>4.1.4.RELEASE</version>
 		</dependency>
-		<!-- 마이바티스 -->		
+		<!-- 마이바티스 -->	
+		<!-- 다중 파일 업로드  -->
+		<dependency>
+		   <groupId>commons-fileupload</groupId>
+		   <artifactId>commons-fileupload</artifactId>
+		   <version>1.2.1</version>
+	 	</dependency>
+	
+		<dependency>
+		   <groupId>commons-io</groupId>
+		   <artifactId>commons-io</artifactId>
+		   <version>1.4</version>
+		</dependency>  
+		<!--  -->	
 		<!-- Test -->
 		<dependency>
 			<groupId>junit</groupId>

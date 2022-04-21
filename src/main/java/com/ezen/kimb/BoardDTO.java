@@ -5,12 +5,13 @@ int num;
 String id,title,content,writeday;
 int readcnt,groups,step,indent;
 int log;
+String picture;
 public BoardDTO() {
 	super();
 	// TODO Auto-generated constructor stub
 }
 public BoardDTO(int num, String id, String title, String content, String writeday, int readcnt, int groups, int step,
-		int indent, int log) {
+		int indent, int log, String picture) {
 	super();
 	this.num = num;
 	this.id = id;
@@ -22,6 +23,7 @@ public BoardDTO(int num, String id, String title, String content, String writeda
 	this.step = step;
 	this.indent = indent;
 	this.log = log;
+	this.picture = picture;
 }
 public int getNum() {
 	return num;
@@ -82,6 +84,12 @@ public int getLog() {
 }
 public void setLog(int log) {
 	this.log = log;
+}
+public String getPicture() {
+	return picture;
+}
+public void setPicture(String picture) {
+	this.picture = picture;
 }
 
 

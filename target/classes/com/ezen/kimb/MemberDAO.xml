@@ -17,8 +17,8 @@
 	</select>
 	
 	<select id="boardinsert">
-		insert into fan_board(num,id,title,content,readcnt,groups,step,indent)
-		values(num_seq.nextval,#{param1},#{param2},#{param3},0,num_seq.currval,0,0)
+		insert into fan_board(num,id,title,content,readcnt,groups,step,indent,picture)
+		values(num_seq.nextval,#{param1},#{param2},#{param3},0,num_seq.currval,0,0,#{param4})
 	</select>
 	
 	<select id="boardout" resultType="com.ezen.kimb.BoardDTO">
@@ -26,7 +26,7 @@
 	</select>
 	
 	<select id="detail" resultType="com.ezen.kimb.BoardDTO">
-		select num,id,title,content,to_char(Writeday,'yyyy-mm-dd')writeday,readcnt,groups,step,indent from fan_board where num = #{param1}
+		select num,id,title,content,to_char(Writeday,'yyyy-mm-dd')writeday,readcnt,groups,step,indent,picture from fan_board where num = #{param1}
 	</select>
 	
 	<update id="readcnt">

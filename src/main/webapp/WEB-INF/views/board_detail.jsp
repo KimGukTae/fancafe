@@ -16,7 +16,7 @@ th,td{
 <h2 style="text-align: center;">글 보기</h2>
 <form action="replyview" method="post">
 	<c:forEach items="${list }" var="dto">
-		<table border="1" width="300" align="center">
+		<table border="1" width="600" align="center">
 			<tr>
 				<th>글번호</th>
 				<td>
@@ -35,6 +35,12 @@ th,td{
 					<textarea rows="6" cols="20">
 						${dto.content }
 					</textarea>
+				</td>
+			</tr>
+			<tr>
+				<th>사진</th>
+				<td>
+					<img src="${pageContext.request.contextPath }/image/${dto.picture}" width="300" height="300">
 				</td>
 			</tr>
 			<tr>
