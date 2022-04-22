@@ -147,8 +147,6 @@ public class HomeController {
 		ArrayList<BoardDTO> list = mdao.boardout();
 		String loginid= request.getParameter("id");
 		for(int i=0; i<list.size(); i++) {
-			
-			
 			if(list.get(i).id.equals(loginid)) {
 				list.get(i).setLog(1);
 			}
@@ -235,7 +233,24 @@ public class HomeController {
 		mdao.deletesave(num);
 		return "redirect:boardout";
 	}
-
+	
+	@RequestMapping(value = "/board_search", method=RequestMethod.POST)
+	public String search(HttpServletRequest request, Model mo) {
+		String category = request.getParameter("category");
+		String search = request.getParameter("search");
+		
+		MemberInter mdao = sqlSession.getMapper(MemberInter.class);
+		ArrayList<BoardDTO> list = null;
+		
+		if(category.equals("title")) {
+			list = mdao.searchtitle(search);
+		}
+		else if(category.equals("id")) {
+			list = mdao.searchid(search);
+		}
+		mo.addAttribute("list", list);
+		return "board_out";
+	}
 	
 	
 	

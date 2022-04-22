@@ -1,9 +1,6 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,10 +11,17 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-
 <body>
 <div class="container">
 	<h2 style="text-align: center;">김태리와 아이틀 회원목록</h2>
+	<form action="board_search" method="post" align="center">
+		<select name="category">
+			<option value="title">제목
+			<option value="id">작성자
+		</select>
+		<input type="text" name="search">
+		<input type="submit" value="검색">
+	</form>
 	<table class="table table-hover table-bordered table-responsive" align="center">
 		<thead>
 			<tr>

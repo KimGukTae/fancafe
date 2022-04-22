@@ -60,6 +60,13 @@
 	<delete id="deletesave">
 		delete from fan_board where num= #{param1} 
 	</delete>
-
+	
+	<select id="searchtitle" resultType="com.ezen.kimb.BoardDTO">
+		select * from fan_board where title like '%' || #{param1} || '%'
+	</select>
+	
+	<select id="searchid" resultType="com.ezen.kimb.BoardDTO">
+		select * from fan_board where id like '%' || #{param1} || '%'
+	</select>
 	
 	</mapper>

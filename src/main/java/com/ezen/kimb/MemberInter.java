@@ -17,4 +17,7 @@ public interface MemberInter {
 	public ArrayList<BoardDTO> modifya(int num,String id);
 	public void modifysave(int num, String content);
 	public void deletesave(int num);
+	public ArrayList<BoardDTO> searchtitle(String search);
+	public ArrayList<BoardDTO> searchid(String search);
+	
 }
