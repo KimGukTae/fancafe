@@ -9,7 +9,8 @@
 </head>
 <body>
 <form action="board_inputsave" method="post" enctype="multipart/form-data">
-	<table border="1" width="300" align="center">
+<h2>게시판 등록</h2>
+	<table border="1" width="400" align="center">
 		<tr>
 			<th>작성자</th>
 			<c:forEach items="${list}" var="dto">

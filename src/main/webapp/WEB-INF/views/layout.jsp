@@ -15,8 +15,11 @@
 #body{   
 	width:80%;text-align:center;
 	top:90px;height:80%;
-	margin-left: 150px;
+	margin-left: 80px;
 	padding-left: 150px;   
+}
+#th{
+	text-align: center;!important;
 }
 #footer{
 	clear:both;

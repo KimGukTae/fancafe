@@ -20,4 +20,7 @@ public interface MemberInter {
 	public ArrayList<BoardDTO> searchtitle(String search);
 	public ArrayList<BoardDTO> searchid(String search);
 	
+	//ÆäÀÌÂ¡
+	public ArrayList<BoardDTO> selectnotice(PagingDTO pdto);
+	public int cntnotice();
 }

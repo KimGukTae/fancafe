@@ -69,4 +69,15 @@
 		select * from fan_board where id like '%' || #{param1} || '%'
 	</select>
 	
+	<select id="cntnotice" resultType="int">
+		select count(*) from fan_board
+	</select>
+	
+	<select id="selectnotice" resultType="com.ezen.kimb.BoardDTO">
+		SELECT  * FROM (
+					select rownum rn,A.* from( 
+						select num,id,title,content,to_char(writeday,'yyyy-mm-dd')writeday,readcnt,groups,step,indent from fan_board ORDER BY groups DESC,step asc)A)
+		WHERE rn BETWEEN #{start} AND #{end}
+	</select>
+	
 	</mapper>

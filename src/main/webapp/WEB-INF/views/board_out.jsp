@@ -13,7 +13,7 @@
 </head>
 <body>
 <div class="container">
-	<h2 style="text-align: center;">김태리와 아이틀 회원목록</h2>
+	<h2 style="text-align: center;">김태리와 아이들 게시판</h2>
 	<form action="board_search" method="post" align="center">
 		<select name="category">
 			<option value="title">제목
@@ -22,15 +22,15 @@
 		<input type="text" name="search">
 		<input type="submit" value="검색">
 	</form>
-	<table class="table table-hover table-bordered table-responsive" align="center">
-		<thead>
-			<tr>
+	<table class="table table-hover table-bordered table-responsive" >
+		<thead style="align:center" >
+			<tr align="center">
 				<th>글번호</th>
 				<th>작성자</th>
 				<th>제목</th>
 				<th>작성일자</th>
 				<th>조회수</th>
-				<th>삭제 / 수정</th>
+				<th>비고</th>
 			</tr>
 		</thead>
 		<c:forEach items="${list}" var="dto">
@@ -55,12 +55,36 @@
 						<a href="modifya?num=${dto.num}&id=${dto.id}">수정</a>
 					</c:when>
 					<c:otherwise>
-						<a>안보임</a>
+						<a></a>
 					</c:otherwise>
 					</c:choose>	
 					</td>
-			</tbody>
+				</tr>
 		</c:forEach>
+		
+		<tr>
+    	<td colspan="5">
+    		<c:if test="${paging.startpage !=1 }">
+    			<a href="notice?nowpage=${paging.startpage-1}&cntperpage=${paging.cntperpage}">&lt;</a>
+    		</c:if>
+    		<c:forEach begin="${paging.startpage}" end="${paging.endpage}" var="p">
+    			<c:choose>
+    				<c:when test="${p == paging.nowpage }">
+    					<b>${p}</b>
+    				</c:when>
+    				<c:when test="${p != paging.nowpage }">
+    					<a href="notice?nowpage=${p }&cntperpage=${paging.cntperpage}">
+    						${p}
+    					</a>
+    				</c:when>
+    			</c:choose>
+    		</c:forEach>
+    		<c:if test="${paging.endpage != paging.lastpage }">
+    			<a href="notice?nowpage=${paging.endpage+1}&cntperpage=${paging.cntperpage}">&gt;</a>
+    		</c:if>
+    	</td>
+    </tr>
+    </tbody>
 	</table>
 </div>
 </body>

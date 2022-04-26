@@ -17,10 +17,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.ezen.kimb.PagingDTO;
+import com.ezen.kimb.MemberInter;
 
 /**
  * Handles requests for the application home page.
@@ -140,10 +144,14 @@ public class HomeController {
 		return "redirect:index";
 	}
 	
-	@RequestMapping(value = "/boardout")
-	public String ko13(HttpServletRequest request,Model mo) {
+
+	@RequestMapping(value = {"/boardout", "/notice"})
+	public String ko13(HttpServletRequest request,Model mo,PagingDTO pdto
+					   ,@RequestParam(value="nowpage", required=false)String nowpage
+					   ,@RequestParam(value="cntperpage", required=false) String cntperpage) {
 		BoardDTO dto = new BoardDTO();
 		MemberInter mdao = sqlSession.getMapper(MemberInter.class);
+		int total = mdao.cntnotice(); // 현재레코드 수
 		ArrayList<BoardDTO> list = mdao.boardout();
 		String loginid= request.getParameter("id");
 		for(int i=0; i<list.size(); i++) {
@@ -154,7 +162,23 @@ public class HomeController {
 				list.get(i).setLog(0);
 			}
 		}
+		if(nowpage == null && cntperpage == null)
+		{
+			nowpage = "1";
+			cntperpage = "5";
+		}
+		else if(nowpage == null)
+		{
+			nowpage = "1";
+		}
+		else if(cntperpage == null)
+		{
+			cntperpage = "5";
+		}
 		mo.addAttribute("list", list);
+		pdto = new PagingDTO(total, Integer.parseInt(nowpage), Integer.parseInt(cntperpage));
+		mo.addAttribute("paging", pdto);
+		mo.addAttribute("list", mdao.selectnotice(pdto));
 		return "board_out";
 	}
 	
@@ -252,6 +276,35 @@ public class HomeController {
 		return "board_out";
 	}
 	
-	
+	/*
+	//페이징
+	@RequestMapping(value = "/boardout")
+	public String ko17(PagingDTO pdto
+					  ,Model mo
+					  ,@RequestParam(value="nowpage", required=false)String nowpage
+					  ,@RequestParam(value="cntperpage", required=false) String cntperpage)
+	{
+		MemberInter mdao = sqlSession.getMapper(MemberInter.class);
+		int total = mdao.cntnotice(); // 현재레코드 수
+		if(nowpage == null && cntperpage == null)
+		{
+			nowpage = "1";
+			cntperpage = "5";
+		}
+		else if(nowpage == null)
+		{
+			nowpage = "1";
+		}
+		else if(cntperpage == null)
+		{
+			cntperpage = "5";
+		}
+		pdto = new PagingDTO(total, Integer.parseInt(nowpage), Integer.parseInt(cntperpage));
+		mo.addAttribute("paging", pdto);
+		mo.addAttribute("list", mdao.selectnotice(pdto));
+		
+		return "board_out";
+	}
+	*/
 	
 }
